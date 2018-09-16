@@ -27,7 +27,7 @@ public class TopList {
 
     public Document parseGlobalTopSellers(int page) throws IOException {
        String url ="https://store.steampowered.com/search/?ignore_preferences=1&os=win&filter=globaltopsellers&page="+page;
-        Connection connection = Jsoup.connect(url).userAgent(Const.agent);
+        Connection connection = Jsoup.connect(url).userAgent(Const.agent).timeout(5000).followRedirects(false);
         Document document = connection.get();
         return document;
 

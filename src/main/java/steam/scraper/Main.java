@@ -29,13 +29,16 @@ public class Main {
             topList.appendRows(sellRows,document1);
             System.out.println("on Page: "+i );
 
-
             long elapsedTime =  System.currentTimeMillis() - timeSinceSleep;
+            System.out.println("time Elpased:"+ (double)(elapsedTime/1000D) );
             if (elapsedTime < timeElapsedBetween){
                 long timeToSleep = timeElapsedBetween - elapsedTime;
                 Thread.sleep(timeToSleep);
+                System.out.println("sleeping");
             }
             timeSinceSleep = System.currentTimeMillis();
         }
     }
+
+
 }
