@@ -1,5 +1,3 @@
-import org.jooq.codegen.GenerationTool
-
 buildscript {
     repositories {
         mavenLocal()
@@ -7,7 +5,6 @@ buildscript {
     }
 
     dependencies {
-        //DB
         classpath 'org.jooq:jooq-codegen:3.11.5'
         classpath 'org.postgresql:postgresql:+'
     }
@@ -15,40 +12,55 @@ buildscript {
 
 plugins {
     id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.2.70'
 }
 
-group 'aftrolle.com'
-version '0.1'
+group 'com.aftrolle'
+version '1.0'
 
 sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+    mavenLocal()
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 
-    //Steam Lib
-    implementation 'com.ibasco.agql:agql-steam-webapi:+'
 
-    //Top Page sellers page
     implementation "com.panforge:robots:1.2.1"
     implementation 'org.jsoup:jsoup:1.11.3'
-
-    //DB
-    implementation 'org.jooq:jooq:3.11.5'
+    compile 'org.jooq:jooq:3.11.5'
     implementation 'org.postgresql:postgresql:+'
     runtime "org.postgresql:postgresql:+"
+    implementation 'com.ibasco.agql:agql-steam-webapi:+'
+
+
+    runtime 'com.h2database:h2:1.4.177'
+
+
+    //Tests JUnit
+    testCompileOnly(
+            'junit:junit:4.12'
+    )
+    testImplementation(
+            'org.junit.jupiter:junit-jupiter-api:5.1.0'
+    )
+    testRuntimeOnly(
+            'org.junit.jupiter:junit-jupiter-engine:5.1.0',
+            'org.junit.vintage:junit-vintage-engine:5.1.0'
+    )
 }
+task helloworld{
 
 
+    doLast {
 
-
-task generateDBClasses{
         //instrcutions https://github.com/etiennestuder/gradle-jooq-plugin
         //https://github.com/Barlog-M/jooq-postgres-json/blob/master/build.gradle
         // Use your favourite XML builder to construct the code generation configuration file
+// ----------------------------------------------------------------------------------
         def writer = new StringWriter()
         def xml = new groovy.xml.MarkupBuilder(writer).configuration('xmlns': 'http://www.jooq.org/xsd/jooq-codegen-3.11.0.xsd') {
             jdbc() {
@@ -62,6 +74,7 @@ task generateDBClasses{
                 database() {
                     inputSchema  'public'
                 }
+
                 // Watch out for this caveat when using MarkupBuilder with "reserved names"
                 // - https://github.com/jOOQ/jOOQ/issues/4797
                 // - http://stackoverflow.com/a/11389034/521799
@@ -71,11 +84,23 @@ task generateDBClasses{
                     daos true
                 }
                 target() {
-                    packageName('aftrolle.com.steam.store.analytics.gen')
+                    packageName('org.gen.post.db')
                     directory('src/main/java')
                 }
             }
         }
+
         // Run the code generator
-        GenerationTool.generate(writer.toString())
+        // ----------------------
+        org.jooq.codegen.GenerationTool.generate(writer.toString())
+    }
 }
+
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
