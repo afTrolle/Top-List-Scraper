@@ -7,9 +7,16 @@ buildscript {
     }
 
     dependencies {
-        //DB
         classpath 'org.jooq:jooq-codegen:3.11.5'
         classpath 'org.postgresql:postgresql:+'
+
+
+        //jooq missing class paths
+        classpath 'com.sun.xml.bind:jaxb-core:2.3.0.1'
+        classpath 'com.sun.xml.bind:jaxb-impl:2.3.0.1'
+        classpath 'javax.activation:activation:1.1.1'
+     //   classpath 'javax.xml.bind:jaxb-api:2.3.0'
+
     }
 }
 
@@ -24,6 +31,7 @@ sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+    mavenLocal()
 }
 
 dependencies {
@@ -39,13 +47,18 @@ dependencies {
     //DB
     implementation 'org.jooq:jooq:3.11.5'
     implementation 'org.postgresql:postgresql:+'
-    runtime "org.postgresql:postgresql:+"
+
+    /*
+    runtime 'javax.activation:activation:1.1.1'
+    runtime 'javax.xml.bind:jaxb-api:2.3.0'
+    runtime 'com.sun.xml.bind:jaxb-core:2.3.0.1'
+    runtime 'com.sun.xml.bind:jaxb-impl:2.3.0.1'
+    */
 }
 
 
-
-
-task generateDBClasses{
+task generateDBClasses {
+    doLast {
         //instrcutions https://github.com/etiennestuder/gradle-jooq-plugin
         //https://github.com/Barlog-M/jooq-postgres-json/blob/master/build.gradle
         // Use your favourite XML builder to construct the code generation configuration file
@@ -56,11 +69,10 @@ task generateDBClasses{
                 url('jdbc:postgresql://localhost:5432/test')
                 user('postgres')
                 password('u9v62')
-
             }
             generator() {
                 database() {
-                    inputSchema  'public'
+                    inputSchema 'public'
                 }
                 // Watch out for this caveat when using MarkupBuilder with "reserved names"
                 // - https://github.com/jOOQ/jOOQ/issues/4797
@@ -78,4 +90,5 @@ task generateDBClasses{
         }
         // Run the code generator
         GenerationTool.generate(writer.toString())
+    }
 }

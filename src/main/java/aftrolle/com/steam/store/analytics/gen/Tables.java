@@ -23,7 +23,7 @@ import javax.annotation.Generated;
 public class Tables {
 
     /**
-     * The table <code>public.helloworld</code>.
+     * The table <code>public.helloWorld</code>.
      */
     public static final Helloworld HELLOWORLD = aftrolle.com.steam.store.analytics.gen.tables.Helloworld.HELLOWORLD;
 }

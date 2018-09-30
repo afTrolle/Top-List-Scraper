@@ -32,10 +32,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Helloworld extends TableImpl<HelloworldRecord> {
 
-    private static final long serialVersionUID = 495663386;
+    private static final long serialVersionUID = -655259398;
 
     /**
-     * The reference instance of <code>public.helloworld</code>
+     * The reference instance of <code>public.helloWorld</code>
      */
     public static final Helloworld HELLOWORLD = new Helloworld();
 
@@ -48,21 +48,21 @@ public class Helloworld extends TableImpl<HelloworldRecord> {
     }
 
     /**
-     * Create a <code>public.helloworld</code> table reference
+     * Create a <code>public.helloWorld</code> table reference
      */
     public Helloworld() {
-        this(DSL.name("helloworld"), null);
+        this(DSL.name("helloWorld"), null);
     }
 
     /**
-     * Create an aliased <code>public.helloworld</code> table reference
+     * Create an aliased <code>public.helloWorld</code> table reference
      */
     public Helloworld(String alias) {
         this(DSL.name(alias), HELLOWORLD);
     }
 
     /**
-     * Create an aliased <code>public.helloworld</code> table reference
+     * Create an aliased <code>public.helloWorld</code> table reference
      */
     public Helloworld(Name alias) {
         this(alias, HELLOWORLD);
