@@ -108,7 +108,7 @@ modules.xml
 hs_err_pid*
 
 ### Gradle ###
-.gradle
+.gradle/
 /build/
 
 # Ignore Gradle GUI config
@@ -125,3 +125,4 @@ gradle-app.setting
 
 
 # End of https://www.gitignore.io/api/java,gradle,intellij+all
+src/main/resources/app_settings.properties
