@@ -18,7 +18,6 @@ public class SteamApi {
        apiClient = new SteamWebApiClient(steamToken);
        SteamEconomy steamEconomy = new SteamEconomy(apiClient);
         SteamStorefront s = new SteamStorefront(apiClient);
-        s.getAppDetails()
        steamEconomy.getAssetPrices(22);
    }
 

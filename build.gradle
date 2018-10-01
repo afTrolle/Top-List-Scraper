@@ -10,12 +10,11 @@ buildscript {
         classpath 'org.jooq:jooq-codegen:3.11.5'
         classpath 'org.postgresql:postgresql:+'
 
-
         //jooq missing class paths
         classpath 'com.sun.xml.bind:jaxb-core:2.3.0.1'
         classpath 'com.sun.xml.bind:jaxb-impl:2.3.0.1'
         classpath 'javax.activation:activation:1.1.1'
-     //   classpath 'javax.xml.bind:jaxb-api:2.3.0'
+        //   classpath 'javax.xml.bind:jaxb-api:2.3.0'
 
     }
 }
@@ -54,6 +53,9 @@ dependencies {
     runtime 'com.sun.xml.bind:jaxb-core:2.3.0.1'
     runtime 'com.sun.xml.bind:jaxb-impl:2.3.0.1'
     */
+
+    implementation 'org.slf4j:slf4j-api:1.7.5'
+    implementation 'org.slf4j:slf4j-log4j12:1.7.5'
 }
 
 
@@ -66,7 +68,7 @@ task generateDBClasses {
         def xml = new groovy.xml.MarkupBuilder(writer).configuration('xmlns': 'http://www.jooq.org/xsd/jooq-codegen-3.11.0.xsd') {
             jdbc() {
                 driver('org.postgresql.Driver')
-                url('jdbc:postgresql://localhost:5432/test')
+                url('jdbc:postgresql://localhost:5432/steam')
                 user('postgres')
                 password('u9v62')
             }

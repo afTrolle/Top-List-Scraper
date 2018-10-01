@@ -4,7 +4,7 @@
 package aftrolle.com.steam.store.analytics.gen;
 
 
-import aftrolle.com.steam.store.analytics.gen.tables.Helloworld;
+import aftrolle.com.steam.store.analytics.gen.tables.SteamTopSell;
 
 import javax.annotation.Generated;
 
@@ -23,7 +23,7 @@ import javax.annotation.Generated;
 public class Tables {
 
     /**
-     * The table <code>public.helloWorld</code>.
+     * The table <code>public.steam_top_sell</code>.
      */
-    public static final Helloworld HELLOWORLD = aftrolle.com.steam.store.analytics.gen.tables.Helloworld.HELLOWORLD;
+    public static final SteamTopSell STEAM_TOP_SELL = aftrolle.com.steam.store.analytics.gen.tables.SteamTopSell.STEAM_TOP_SELL;
 }

@@ -4,7 +4,7 @@
 package aftrolle.com.steam.store.analytics.gen;
 
 
-import aftrolle.com.steam.store.analytics.gen.tables.Helloworld;
+import aftrolle.com.steam.store.analytics.gen.tables.SteamTopSell;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,7 +30,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Public extends SchemaImpl {
 
-    private static final long serialVersionUID = -726524467;
+    private static final long serialVersionUID = -476708065;
 
     /**
      * The reference instance of <code>public</code>
@@ -38,9 +38,9 @@ public class Public extends SchemaImpl {
     public static final Public PUBLIC = new Public();
 
     /**
-     * The table <code>public.helloWorld</code>.
+     * The table <code>public.steam_top_sell</code>.
      */
-    public final Helloworld HELLOWORLD = aftrolle.com.steam.store.analytics.gen.tables.Helloworld.HELLOWORLD;
+    public final SteamTopSell STEAM_TOP_SELL = aftrolle.com.steam.store.analytics.gen.tables.SteamTopSell.STEAM_TOP_SELL;
 
     /**
      * No further instances allowed
@@ -67,6 +67,6 @@ public class Public extends SchemaImpl {
 
     private final List<Table<?>> getTables0() {
         return Arrays.<Table<?>>asList(
-            Helloworld.HELLOWORLD);
+            SteamTopSell.STEAM_TOP_SELL);
     }
 }

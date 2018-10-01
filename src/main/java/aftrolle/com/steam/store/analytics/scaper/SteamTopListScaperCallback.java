@@ -1,6 +1,10 @@
 package aftrolle.com.steam.store.analytics.scaper;
 
-public interface SteamTopListScaperCallback {
+import aftrolle.com.steam.store.analytics.scaper.toplist.TopList;
+import aftrolle.com.steam.store.analytics.scaper.toplist.TopListItem;
 
-    public void SteamTopListScaperCallback(TopList topList);
+import java.util.ArrayList;
+
+public interface SteamTopListScaperCallback {
+    public void SteamTopListScaperCallback(ArrayList<TopListItem> topList);
 }

@@ -73,15 +73,12 @@ public class TopList {
         }
     }
 
-
-
     public int getNumPages(Document document){
         Elements pagination = document.select(".search_pagination");
         Elements a = pagination.select("a");
         Element last = a.get(a.size()-2);
         String text = last.text();
         System.out.println(text);
-
         return Integer.parseInt(text);
     }
 
