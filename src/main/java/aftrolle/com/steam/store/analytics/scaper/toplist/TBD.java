@@ -10,13 +10,28 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Currency;
+import java.util.Set;
 
 public class TBD {
 
-    private static final PropertiesFetcher propertiesFetcher = PropertiesFetcher.getInstance();
+    public TBD() {
+        initSymbols();
+    }
+
+    private static PropertiesFetcher propertiesFetcher;
+
+    static {
+        try {
+            propertiesFetcher = PropertiesFetcher.getInstance();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     /*
     //Not used
@@ -53,14 +68,14 @@ public class TBD {
         TopListItem topSellRow = new TopListItem();
         //set price
         Elements search_price = row.select(".search_price");
-        NumberFormat format = new DecimalFormat();
+
 
         String[] s = search_price.text().split(" ");
         if (s.length > 1) {
-            topSellRow.price = format.parse((s[1].substring(0, s[1].length() - 1))).floatValue();
-            topSellRow.prevPrice = format.parse(s[0].substring(0, s[0].length() - 1)).floatValue();
+            topSellRow.price = getFloatFromReading(s[1]);
+            topSellRow.prevPrice = getFloatFromReading(s[0]);
         } else {
-            topSellRow.price = format.parse(s[0].substring(0, s[0].length() - 1)).floatValue();
+            topSellRow.price = getFloatFromReading(s[0]);
         }
 
         topSellRow.appIds = getIntArray(row, "data-ds-appid", ",");
@@ -70,16 +85,40 @@ public class TBD {
         return topSellRow;
     }
 
+    DecimalFormat format = new DecimalFormat();
+    DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+
+    private void initSymbols() {
+        symbols.setDecimalSeparator(',');
+        symbols.setGroupingSeparator(' ');
+        format.setDecimalFormatSymbols(symbols);
+        //  format.setCurrency(Currency.getInstance("EUR"));
+    }
+
+    private float getFloatFromReading(String s) {
+        //are currencies that doesn't have symbol!
+        try {
+            return format.parse(s).floatValue();
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
 
     private ArrayList<Integer> getIntArray(Element row, String attributeKey, String regex) {
-        String attrStr = row.attr(attributeKey);
-        if (!attrStr.isEmpty()) {
-            ArrayList<Integer> attributes = new ArrayList<>();
-            for (String s1 : attrStr.split(regex)) {
-                attributes.add(Integer.parseInt(s1));
+        try {
+            String attrStr = row.attr(attributeKey);
+            if (!attrStr.isEmpty()) {
+                ArrayList<Integer> attributes = new ArrayList<>();
+                for (String s1 : attrStr.split(regex)) {
+                    attributes.add(Integer.parseInt(s1));
+                }
+                return attributes;
+            } else {
+                return null;
             }
-            return attributes;
-        } else {
+        } catch (Exception e) {
             return null;
         }
     }

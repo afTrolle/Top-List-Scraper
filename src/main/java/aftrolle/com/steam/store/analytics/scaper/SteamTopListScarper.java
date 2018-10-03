@@ -2,11 +2,9 @@ package aftrolle.com.steam.store.analytics.scaper;
 
 import aftrolle.com.steam.store.analytics.loader.PropertiesFetcher;
 import aftrolle.com.steam.store.analytics.scaper.toplist.TBD;
-import aftrolle.com.steam.store.analytics.scaper.toplist.TopList;
 import aftrolle.com.steam.store.analytics.scaper.toplist.TopListItem;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.ArrayList;
 
 public class SteamTopListScarper {
@@ -17,7 +15,7 @@ public class SteamTopListScarper {
     private final TBD tbd;
     private SteamTopListScaperCallback callback;
 
-    public SteamTopListScarper() {
+    public SteamTopListScarper() throws IOException {
         thread = new Thread(scraperLooper);
         tbd = new TBD();
     }
@@ -53,11 +51,9 @@ public class SteamTopListScarper {
         try {
             ArrayList<TopListItem> topList = tbd.getTopList();
             callback.SteamTopListScaperCallback(topList);
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+         //   e.printStackTrace();
             //TODO FIX ERROR Handling.
-        } catch (ParseException e) {
-            e.printStackTrace();
         }
     }
 

@@ -14,8 +14,8 @@ public class SteamApi {
     SteamWebApiClient apiClient;
 
    public SteamApi(){
-       String steamToken = PropertiesFetcher.getInstance().Steam_web_api_token;
-       apiClient = new SteamWebApiClient(steamToken);
+       //String steamToken = PropertiesFetcher.getInstance().Steam_web_api_token;
+     //  apiClient = new SteamWebApiClient(steamToken);
        SteamEconomy steamEconomy = new SteamEconomy(apiClient);
         SteamStorefront s = new SteamStorefront(apiClient);
        steamEconomy.getAssetPrices(22);
